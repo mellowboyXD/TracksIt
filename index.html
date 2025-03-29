@@ -40,26 +40,26 @@
             <p class="mt-4 text-sm text-center">Total: $500 / $1000</p>
         </div>
 
-        <form class="row row-cols-lg-auto g-2 align-items-center m-1">
+        <form class="row row-cols-lg-auto g-2 align-items-center m-1" id="addForm">
           <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupUsername"
+            <label class="visually-hidden" for="description"
               >description</label
             >
             <div class="input-group">
               <input
                 type="text"
                 class="form-control"
-                id="inlineFormInputGroupUsername"
+                id="description"
                 placeholder="description"
               />
             </div>
           </div>
 
           <div class="col-6">
-            <label class="visually-hidden" for="inlineFormSelectPref"
+            <label class="visually-hidden" for="category"
               >category</label
             >
-            <select class="form-select" id="inlineFormSelectPref">
+            <select class="form-select" id="category">
                 <option selected>category</option>
                 <option value="rent">rent</option>
                 <option value="food">food</option>
@@ -70,28 +70,28 @@
           </div>
 
           <div class="col-6">
-            <label class="visually-hidden" for="inlineFormInputGroupUsername"
+            <label class="visually-hidden" for="date"
               >date</label
             >
             <div class="input-group">
               <input
                 type="date"
                 class="form-control"
-                id="inlineFormInputGroupUsername"
+                id="date"
                 placeholder=""
               />
             </div>
           </div>
 
           <div class="col-12 d-flex align-items-center">
-            <label class="visually-hidden" for="inlineFormInputGroupUsername"
+            <label class="visually-hidden" for="amount"
               >amount</label
             >
             <div class="input-group">
               <input
                 type="number"
                 class="form-control"
-                id="inlineFormInputGroupUsername"
+                id="amount"
                 placeholder="amount i.e $50"
               />
             </div>
@@ -103,6 +103,7 @@
         </form>
 
         <script src="scripts/donut.js"></script>
+        <script src="scripts/handleForm.js"></script>
       </main>
       <footer class="w-100 bg-light-subtle text-center">
         <p class="mt-1">
