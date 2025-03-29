@@ -1,0 +1,7 @@
+:root {
+    --bs-light-bg-subtle: #4c4b4b46;
+}
+
+main {
+    border: 2px solid white;
+}
