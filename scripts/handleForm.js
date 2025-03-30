@@ -1,4 +1,5 @@
 const addFormEl = document.getElementById('addForm');
+
 const descriptionEl = document.getElementById('description');
 const categoryEl = document.getElementById('category');
 const dateFieldEl = document.getElementById('date');
