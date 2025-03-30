@@ -2,10 +2,10 @@ const addForm = document.getElementById('addForm');
 
 addForm.onsubmit = function(e) {
     e.preventDefault();
-    const description = document.getElementById('description');
-    const category = document.getElementById('category');
-    const dateField = document.getElementById('date');
-    const amount = document.getElementById('amount');
+    const description = document.getElementById('description').value;
+    const category = document.getElementById('category').value;
+    const dateField = document.getElementById('date').value;
+    const amount = document.getElementById('amount').value;
     
-    console.log(dateField.value);
+    console.log(dateField);
 }
