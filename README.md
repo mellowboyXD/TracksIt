@@ -1,4 +1,4 @@
-# TrackIt - Personal Client-based Expense Tracker app
+# TracksIt - Personal Client-based Expense Tracker app
 
 For a while now, i've been looking for the perfect, completely free, simple, expense tracker that is not going to just use my data to sell me ads.
 
