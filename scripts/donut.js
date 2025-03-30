@@ -35,7 +35,7 @@ const options = {
         let percentage = (value * 100 / sum).toFixed(1) + "%";
         return percentage;
       },
-      color: "#2e2e2e",
+      color: "#f8f9fa",
       font: {
         size: 13,
         weight: "bold"
