@@ -27,8 +27,8 @@ addFormEl.onsubmit = function(e) {
  * @param {String} desc - description
  * @param {String} cat - category
  * @param {String} dateField - date
- * @param {String} amount
- * @returns {Boolean} Either true or false
+ * @param {String} amount - gets converted to a float
+ * @returns Either true or false
  */
 function validateFormData(desc, cat, dateField, amount) {
     amount = parseFloat(amount);
