@@ -88,7 +88,8 @@
               <input
                 type="text"
                 onmouseover="(this.type='date')"
-                onmouseleave="(this.type='text')"
+                onfocus="(this.type='date')"
+                onblur="(this.type='text')"
                 class="form-control"
                 id="date"
                 placeholder="mm/dd/yyyy"
