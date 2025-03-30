@@ -23,15 +23,21 @@
     <div
       class="container-fluid p-0 d-flex flex-column align-items-center justify-content-between vh-100"
     >
-      <header class="p-2 w-100 bg-light-subtle d-flex justify-content-around">
-        <a
-          href="../index.html"
-          class="btn btn-outline-primary text-decoration-none"
-          ><i class="fa-solid fa-chart-pie"></i> Dashboard</a
-        >
-        <a href="#" class="btn btn-primary text-decoration-none"><i class="fa-solid fa-table"></i> Table</a>
-        <a href="#" class="btn btn-outline-secondary text-decoration-none"><i class="fa-solid fa-gear"></i></a>
-      </header>
+    <nav class="navbar bg-body-tertiary navbar-expand-lg w-100">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+          <i class="fa-solid fa-chart-pie"></i>
+          Dashboard
+        </a>
+        <a class="navbar-brand text-primary" href="#">
+          <i class="fa-solid fa-table"></i>
+          Table
+        </a>
+        <a class="navbar-brand" href="#">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+      </div>
+    </nav>
       <main class="w-100 h-100 m-3 p-2">
 
         <form class="row row-cols-lg-auto g-2 align-items-center m-1" id="addForm">
