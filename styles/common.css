@@ -1,3 +1,7 @@
 :root {
     --bs-dark-bg-subtle: #4c4b4b46;
 }
+
+.hidden-cell {
+    display: none;
+}
