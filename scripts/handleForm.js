@@ -15,8 +15,9 @@ addFormEl.onsubmit = function(e) {
     
     // Data Validation
     if (!validateFormData(description, category, dateField, amount)) {
-        alert("All fields must be filled. Input correct data")
+        alert('All fields must be filled. Input correct data')
     } else {
+        alert('New entry created!')
         clearForm();
     }
 }
@@ -33,7 +34,7 @@ addFormEl.onsubmit = function(e) {
  */
 function validateFormData(desc, cat, dateField, amount) {
     amount = parseFloat(amount);
-    if (desc.length === 0 || dateField.length === 0 || cat === "category") {
+    if (desc.length === 0 || dateField.length === 0 || cat === 'category') {
         return false;
     } else if (amount.length === 0 || isNaN(amount)) {
         return false;
@@ -46,8 +47,8 @@ function validateFormData(desc, cat, dateField, amount) {
  * Clears the form input values
  */
 function clearForm() {
-    descriptionEl.value = "";
-    amountEl.value = "";
-    categoryEl.value = "category";
-    dateFieldEl.value = "";
+    descriptionEl.value = '';
+    amountEl.value = '';
+    categoryEl.value = 'category';
+    dateFieldEl.value = '';
 }
