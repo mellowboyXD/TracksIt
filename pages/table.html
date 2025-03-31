@@ -106,6 +106,35 @@
             </div>
           </form>
 
+          <form class="row row-cols-lg-auto g-2 align-items-center m-1 p-2" id="month-year-selector-form">
+            <div class="month-selector-container form-floating col-6">
+              <select class="form-select mb-2" name="month-selector" id="month-selector">
+                <option value="jan">January</option>
+                <option value="feb">Febuary</option>
+                <option value="mar">March</option>
+                <option value="apr">April</option>
+                <option value="may">May</option>
+                <option value="jun">June</option>
+                <option value="jul">July</option>
+                <option value="aug">August</option>
+                <option value="sep">September</option>
+                <option value="oct">October</option>
+                <option value="nov">November</option>
+                <option value="dec">December</option>
+              </select>
+              <label for="month-selector">Select Month</label>
+            </div>
+  
+            <div class="year-selector-container form-floating col-6">
+              <select class="form-select mb-2" name="year-selector" id="year-selector">
+                <!-- <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option> -->
+              </select>
+              <label for="year-selector">Select Year</label>
+            </div>
+          </form>
+
         <table class="table table-dark table-hover m-1" id="expenses-table">
           <thead>
             <tr>
@@ -225,6 +254,7 @@
 
         <script src="../scripts/handleAddForm.js" defer></script>
         <script src="../scripts/handleEdit.js" defer></script>
+        <script src="../scripts/handleMonthYearSelector.js" defer></script>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
