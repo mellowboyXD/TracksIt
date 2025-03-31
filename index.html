@@ -45,6 +45,35 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
+        <form class="row row-cols-lg-auto g-2 align-items-center p-0" id="month-year-selector-form">
+          <div class="month-selector-container form-floating col-6">
+            <select class="form-select mb-2" name="month-selector" id="month-selector">
+              <option value="jan">January</option>
+              <option value="feb">Febuary</option>
+              <option value="mar">March</option>
+              <option value="apr">April</option>
+              <option value="may">May</option>
+              <option value="jun">June</option>
+              <option value="jul">July</option>
+              <option value="aug">August</option>
+              <option value="sep">September</option>
+              <option value="oct">October</option>
+              <option value="nov">November</option>
+              <option value="dec">December</option>
+            </select>
+            <label for="month-selector">Select Month</label>
+          </div>
+
+          <div class="year-selector-container form-floating col-6">
+            <select class="form-select mb-2" name="year-selector" id="year-selector">
+              <!-- <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option> -->
+            </select>
+            <label for="year-selector">Select Year</label>
+          </div>
+        </form>
+
         <div class="m-2 mw-100">
             <canvas id="myDonut"></canvas>
             <p class="mt-4 text-sm text-center">Total: $500 / $1000</p>
@@ -70,7 +99,7 @@
             <label class="visually-hidden" for="category"
               >category</label
             >
-            <select class="form-select" id="category" aria-placeholder="test" required>
+            <select class="form-select" id="category" aria-placeholder="category" required>
                 <option selected>category</option>
                 <option value="rent">rent</option>
                 <option value="food">food</option>
@@ -119,7 +148,8 @@
         </form>
 
         <script src="scripts/donut.js" defer></script>
-        <script src="scripts/handleForm.js" defer></script>
+        <script src="scripts/handleAddForm.js" defer></script>
+        <script src="scripts/handleMonthYearSelector.js" defer></script>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
