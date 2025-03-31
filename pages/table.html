@@ -82,7 +82,7 @@
                   onblur="(this.type='text')"
                   class="form-control"
                   id="date"
-                  placeholder="mm/dd/yyyy"
+                  placeholder="yyyy-mm-dd"
                 />
               </div>
             </div>
@@ -123,7 +123,7 @@
               <td class="hidden-cell">this is the id</td>
               <td>Chicken Sharwarma</td>
               <td>food</td>
-              <td>28/03</td>
+              <td>2025-03-28</td>
               <td>$ 5</td>              
             </tr>
             <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -131,7 +131,7 @@
               <td class="hidden-cell">this is the id</td>
               <td>Hotdog</td>
               <td>food</td>
-              <td>29/03</td>
+              <td>2025-03-29</td>
               <td>$ 5.45</td>
             </tr>
           </tbody>
@@ -190,10 +190,12 @@
                     >
                     <div class="input-group">
                       <input
-                        type="date"
+                        type="text"
+                        onmouseover="(this.type='date')"
+                        onfocus="(this.type='date')"
+                        onblur="(this.type='text')"
                         class="form-control"
                         id="dateEdit"
-                        placeholder="mm/dd/yyyy"
                       />
                     </div>
                   </div>

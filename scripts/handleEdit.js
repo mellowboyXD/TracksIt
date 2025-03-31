@@ -20,6 +20,7 @@ tableRows.forEach(row => {
         descriptionEditEl.value = rowData[2];
         categoryEditEl.value = rowData[3];
         dateEditEl.value = rowData[4];
+        dateEditEl.placeholder = rowData[4];
         amountEditEl.value = rowData[5];
         console.log(id);
     })
