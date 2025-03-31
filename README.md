@@ -1,4 +1,4 @@
-<p style="text-align: center"><img src="images/logo.png" width="200px"></p>
+<p align="center" ><img src="images/logo.png" width="200px"></p>
 
 # TracksIt - Personal Client-based Expense Tracker app
 
