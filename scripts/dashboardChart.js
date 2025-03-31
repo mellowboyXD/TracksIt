@@ -1,4 +1,4 @@
-const ctx = document.getElementById("myDonut").getContext("2d");
+const ctx = document.getElementById("dashboard-chart").getContext("2d");
 const chartType = "pie";
 
 Chart.register(ChartDataLabels);
