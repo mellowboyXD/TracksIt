@@ -180,6 +180,7 @@
             <div class="modal-content bg-dark text-light" data-bs-theme="dark">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Entry <i class="fa-regular fa-pen-to-square"></i></h1>
+                <p class="hidden-cell" id="modal-id">id</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -244,8 +245,8 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="deleteEntry"><i class="fa-regular fa-trash-can"></i> Delete</button>
-                <button type="button" class="btn btn-primary" id="saveEdit"><i class="fa-regular fa-floppy-disk"></i> Save changes</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteEntry"><i class="fa-regular fa-trash-can"></i> Delete</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveEdit"><i class="fa-regular fa-floppy-disk"></i> Save changes</button>
               </div>
             </div>
           </div>
@@ -253,8 +254,9 @@
 
         <script type="module" src="../scripts/db.js" defer></script>
         <script type="module" src="../scripts/handleAddForm.js" defer></script>
-        <script src="../scripts/handleEdit.js" defer></script>
+        <script type="module" src="../scripts/handleEdit.js" defer></script>
         <script src="../scripts/handleMonthYearSelector.js" defer></script>
+        <script type="module" src="../scripts/table.js" defer></script>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
