@@ -1,5 +1,5 @@
 const ctx = document.getElementById("dashboard-chart").getContext("2d");
-const chartType = "pie";
+let chartType = "pie";
 
 Chart.register(ChartDataLabels);
 
