@@ -142,27 +142,26 @@
               <th scope="col">Description</th>
               <th scope="col">Category</th>
               <th scope="col">Date</th>
-              <th scope="col">Amount</th>
-              <th scope="col"></th>
+              <th scope="col">Amount $</th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <!-- <tr data-bs-toggle="modal" data-bs-target="#editModal">
               <th scope="row">1</th>
               <td class="hidden-cell">this is the id</td>
               <td>Chicken Sharwarma</td>
               <td>food</td>
               <td>2025-03-28</td>
               <td>$ 5</td>              
-            </tr>
-            <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+            </tr> -->
+            <!-- <tr data-bs-toggle="modal" data-bs-target="#editModal" class="tr">
               <th scope="row">2</th>
               <td class="hidden-cell">this is the id</td>
               <td>Hotdog</td>
               <td>food</td>
               <td>2025-03-29</td>
-              <td>$ 5.45</td>
-            </tr>
+              <td>$ 5.45</td> -->
+            <!-- </tr> -->
           </tbody>
           <tfoot class="table-group-divider">
             <tr>
@@ -170,17 +169,18 @@
               <td></td>
               <td></td>
               <td class="table-info">Sum</td>
-              <td class="table-info">$ 0</td>
+              <td class="table-info" id="sum-total">0</td>
             </tr>
           </tfoot>
         </table>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content bg-dark text-light" data-bs-theme="dark">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Entry <i class="fa-regular fa-pen-to-square"></i></h1>
+                <p class="hidden-cell" id="modal-id">id</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -245,16 +245,18 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="deleteEntry"><i class="fa-regular fa-trash-can"></i> Delete</button>
-                <button type="button" class="btn btn-primary" id="saveEdit"><i class="fa-regular fa-floppy-disk"></i> Save changes</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteEntry"><i class="fa-regular fa-trash-can"></i> Delete</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveEdit"><i class="fa-regular fa-floppy-disk"></i> Save changes</button>
               </div>
             </div>
           </div>
         </div>
 
-        <script src="../scripts/handleAddForm.js" defer></script>
-        <script src="../scripts/handleEdit.js" defer></script>
+        <script type="module" src="../scripts/db.js" defer></script>
+        <script type="module" src="../scripts/handleAddForm.js" defer></script>
+        <script type="module" src="../scripts/handleEdit.js" defer></script>
         <script src="../scripts/handleMonthYearSelector.js" defer></script>
+        <script type="module" src="../scripts/table.js" defer></script>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
