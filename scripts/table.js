@@ -1,7 +1,7 @@
 import { getAllFromDB } from "./db.js";
 
 export async function refreshTable() {
-  if (window.location.href.endsWith("table.html")) {
+  if (window.location.href.includes("table")) {
     const tableBody = document.querySelector("tbody");
     tableBody.innerHTML = "";
     try {
