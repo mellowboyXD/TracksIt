@@ -1,3 +1,6 @@
+import { getAllFromDB, insertIntoDB } from "./db.js";
+
+
 const addFormEl = document.getElementById('addForm');
 
 const descriptionEl = document.getElementById('description');
@@ -6,7 +9,7 @@ const dateFieldEl = document.getElementById('date');
 const amountEl = document.getElementById('amount');
 
 
-addFormEl.onsubmit = function(e) {
+addFormEl.onsubmit = async function(e) {
     e.preventDefault();
     const description = descriptionEl.value;
     const category = categoryEl.value;
@@ -17,8 +20,14 @@ addFormEl.onsubmit = function(e) {
     if (!validateFormData(description, category, dateField, amount)) {
         alert('All fields must be filled. Input correct data')
     } else {
-        alert('New entry created!')
-        clearForm();
+        const res = await addEntry(description, category, dateField, amount);
+        if (res) {
+            alert('New entry created!');
+            clearForm();
+            window.location.reload();
+        } else {
+            alert('Problem adding data');
+        }
     }
 }
 
@@ -52,3 +61,49 @@ function clearForm() {
     categoryEl.value = 'category';
     dateFieldEl.value = '';
 }
+
+async function addEntry(desc, cat, dateField, amount) {
+    try {
+        const result = await insertIntoDB({
+            description: desc,
+            category: cat,
+            date: dateField,
+            amount: amount
+        });
+        if (result) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.error("Could not add data to the database.", err);
+        return false;
+    }
+}
+
+async function displayRows() {
+    const tableBody = document.querySelector('tbody');
+    try {
+        const res = await getAllFromDB();
+        let count = 0;
+        res.forEach(row => {
+            // display
+            const data = `
+                <tr data-bs-toggle="modal" data-bs-target="#editModal" class="row-data">
+                    <th scope="row">${++count}</th>
+                    <td class="hidden-cell">${row.id}</td>
+                    <td>${row.description}</td>
+                    <td>${row.category}</td>
+                    <td>${row.date}</td>
+                    <td>${row.amount}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += data;
+        });
+    } catch(err) {
+        console.error("Error getting data. ", err);
+        return false;
+    }
+}
+
+displayRows();
