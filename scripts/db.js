@@ -41,6 +41,7 @@ request.onsuccess = function () {
  * or rejects with an error message if the database cannot be opened.
  */
 function getDB() {
+  const request = indexedDB.open("expensesDatabase", 1);
   return new Promise((resolve, reject) => {
     if (db) {
       resolve(db);
@@ -95,13 +96,6 @@ function insertIntoDB({ description, category, date, amount }) {
         reject("Error adding record:" + putRequest.error);
       };
 
-      transaction.oncomplete = function () {
-        db.close();
-      };
-
-      transaction.onerror = function () {
-        db.close();
-      };
     } catch (error) {
       reject("Database is not available:" + error);
     }
@@ -129,14 +123,6 @@ function getAllFromDB() {
 
       getAllRequest.onerror = function () {
         reject("Error getting records: " + getAllRequest.error);
-      };
-
-      transaction.oncomplete = function () {
-        db.close();
-      };
-
-      transaction.onerror = function () {
-        db.close();
       };
     } catch (err) {
       console.error(err);
@@ -193,13 +179,6 @@ function updateFromDB({ id, description, category, date, amount }) {
         reject("Error getting record to update");
       };
 
-      transaction.oncomplete = function () {
-        db.close();
-      };
-
-      transaction.onerror = function () {
-        db.close();
-      };
     } catch (err) {
       reject("Could not connect to db: " + err);
     }
@@ -229,13 +208,6 @@ function clearDB() {
         reject("Error clearing record", clearRequest.error);
       };
 
-      transaction.oncomplete = function () {
-        db.close();
-      };
-
-      transaction.onerror = function () {
-        db.close();
-      };
     } catch (err) {
       reject("Could not get database: " + err);
     }
@@ -268,13 +240,6 @@ function deleteRecordFromDB(id) {
         reject("Error deleting record: " + deleteRequest.error);
       };
 
-      transaction.oncomplete = function () {
-        db.close();
-      };
-
-      transaction.onerror = function () {
-        db.close();
-      };
     } catch (err) {
       reject("Error connecting to database: " + err);
     }
