@@ -10,7 +10,7 @@ let chartData = {
   "rent": 0,
   "transport": 0,
   "shopping": 0,
-  "others": 0
+  "other": 0
 };
 
 if(!dataValues) {
@@ -20,6 +20,8 @@ if(!dataValues) {
     chartData[row.category] += parseFloat(row.amount);
   });
 }
+
+console.log(chartData);
 
 // User Configs
 let chartType = "pie";
