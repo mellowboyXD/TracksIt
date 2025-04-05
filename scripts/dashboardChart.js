@@ -1,16 +1,26 @@
 const ctx = document.getElementById("dashboard-chart").getContext("2d");
-let chartType = "pie";
-
 Chart.register(ChartDataLabels);
 
+// User Configs
+let chartType = "pie";
+let chartLabels = ["Rent", "Food", "Transport", "Shopping", "Others"];
+let dataItems = [12, 19, 3, 5, 2];
+let colorPalette = ["red", "green", "orange", "purple", "blue"];
+let borderWidth = 0.8
+let showLegend = false;
+let legendPosition = "bottom";
+let dataLabelColor = "#f8f9fa";
+let dataLabelFontSize = 13;
+let dataLabelFontWeight = "bold";
+
 const data = {
-  labels: ["Rent", "Food", "Transport", "Shopping", "Others"],
+  labels: chartLabels,
   datasets: [
     {
       label: "$",
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: ["red", "green", "orange", "purple", "blue"],
-      borderWidth: 1,
+      data: dataItems,
+      backgroundColor: colorPalette,
+      borderWidth: borderWidth,
     },
   ],
 };
@@ -19,8 +29,8 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      display: false,
-      position: "bottom",
+      display: showLegend,
+      position: legendPosition,
     },
     tooltip: {
       enabled: true, 
@@ -35,10 +45,10 @@ const options = {
         let percentage = (value * 100 / sum).toFixed(1) + "%";
         return percentage;
       },
-      color: "#f8f9fa",
+      color: dataLabelColor,
       font: {
-        size: 13,
-        weight: "bold"
+        size: dataLabelFontSize,
+        weight: dataLabelFontWeight
       },
     },
   },
