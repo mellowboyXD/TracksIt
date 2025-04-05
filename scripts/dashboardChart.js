@@ -1,11 +1,29 @@
+import { fetchData } from "./index.js";
+
 const ctx = document.getElementById("dashboard-chart").getContext("2d");
+const sumEl = document.getElementById('sum');
 Chart.register(ChartDataLabels);
+
+const dataValues = await fetchData();
+let chartData = {
+  "food": 0,
+  "rent": 0,
+  "transport": 0,
+  "shopping": 0,
+  "others": 0
+};
+
+if(!dataValues) {
+  console.error("Could not fetch data");
+} else {
+  dataValues.forEach(row => {
+    chartData[row.category] += parseFloat(row.amount);
+  });
+}
 
 // User Configs
 let chartType = "pie";
-let chartLabels = ["Rent", "Food", "Transport", "Shopping", "Others"];
-let dataItems = [12, 19, 3, 5, 2];
-let colorPalette = ["red", "green", "orange", "purple", "blue"];
+let colorPalette = ["green", "red", "orange", "purple", "blue"];
 let borderWidth = 0.8
 let showLegend = false;
 let legendPosition = "bottom";
@@ -14,12 +32,12 @@ let dataLabelFontSize = 13;
 let dataLabelFontWeight = "bold";
 
 const data = {
-  labels: chartLabels,
+  labels: Object.keys(chartData),
   datasets: [
     {
       label: "$",
-      data: dataItems,
       backgroundColor: colorPalette,
+      data: Object.values(chartData),
       borderWidth: borderWidth,
     },
   ],
@@ -38,11 +56,19 @@ const options = {
     datalabels: {
       formatter: (value, ctx) => {
         let sum = 0;
-        let dataArr = ctx.chart.data.datasets[0].data;
+        let dataArr = ctx.chart.data.datasets[0].data;        
         dataArr.map(data => {
-          sum += data;
+          if(parseFloat(data) != 0){
+            sum += parseFloat(data);
+          }
         });
         let percentage = (value * 100 / sum).toFixed(1) + "%";
+        sumEl.innerText = sum;
+        if (sum <= 0) {
+          percentage = "No data";
+        } else if(percentage === "0.0%"){
+          percentage = "";
+        }
         return percentage;
       },
       color: dataLabelColor,

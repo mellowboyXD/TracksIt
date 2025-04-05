@@ -74,9 +74,9 @@
           </div>
         </form>
 
-        <div class="m-2 mw-100">
+        <div class="m-2 mw-100" id="chart">
             <canvas id="dashboard-chart"></canvas>
-            <p class="mt-4 text-sm text-center">Total: $500 / $1000</p>
+            <p class="mt-4 text-sm text-center">Total: $<span id="sum">500</span> / <span id="budget">$1000</span></p>
         </div>
 
         <form class="row row-cols-lg-auto g-2 align-items-center m-1" id="addForm">
@@ -147,7 +147,8 @@
           </div>
         </form>
 
-        <script type="module" src="scripts/db.js"></script>
+        <script type="module" src="scripts/db.js" defer></script>
+        <script type="module" src="scripts/index.js"></script>
         <script type="module" src="scripts/dashboardChart.js" defer></script>
         <script type="module" src="scripts/handleAddForm.js" defer></script>
         <script type="module" src="scripts/handleMonthYearSelector.js" defer></script>
