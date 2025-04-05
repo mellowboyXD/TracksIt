@@ -1,4 +1,5 @@
 import { insertIntoDB } from "./db.js";
+import { fetchData, refreshChart } from "./index.js";
 import { refreshTable as refreshTable } from "./table.js";
 
 const addFormEl = document.getElementById("addForm");
@@ -23,12 +24,20 @@ addFormEl.onsubmit = async function (e) {
     if (res) {
       alert("New entry created!");
       clearForm();
-      await refreshTable();
+      await refreshPage();
     } else {
       alert("Problem adding data");
     }
   }
 };
+
+async function refreshPage() {
+  if(window.location.href.includes('table')){
+    await refreshTable();
+  } else {
+    await refreshChart();
+  }
+}
 
 /**
  * Validates the form input fields
