@@ -179,8 +179,8 @@ function getRangeFromDB(
       if (cursor) {
         range.push(cursor.value);
         cursor.continue();
-      } else {
-        resolve(cursor);
+      } else {        
+        resolve(range);
       }
     };
 
@@ -306,6 +306,7 @@ function deleteRecordFromDB(id) {
 export {
   insertIntoDB,
   getAllFromDB,
+  getRangeFromDB,
   updateFromDB,
   deleteRecordFromDB,
   clearDB,

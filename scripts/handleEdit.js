@@ -37,7 +37,8 @@ deleteButton.addEventListener('click', async () => {
     try {
         await deleteRecordFromDB(id);
         console.log("Successfully deleted entry");
-        await refreshTable();
+        // await refreshTable();
+        window.location.reload();
     } catch(err) {
         console.error(err);
     }
@@ -60,7 +61,8 @@ saveEditButton.addEventListener('click', async () => {
         });
 
         console.log("Successfully Updated Entry");
-        await refreshTable();
+        // await refreshTable();
+        window.location.reload();
     } catch(err) {
         console.error("Could not update entry", err);
     }
