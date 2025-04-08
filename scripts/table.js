@@ -1,11 +1,19 @@
-import { getAllFromDB } from "./db.js";
+import { getAllFromDB, getRangeFromDB } from "./db.js";
 
-export async function refreshTable() {
+const yearSelectEl = document.getElementById("year-selector");
+const monthSelectEl = document.getElementById("month-selector");
+
+export async function refreshTable(data) {
+  if(!data) {
+    data = await getRangeFromDB();
+  }
+  
   if (window.location.href.includes("table")) {
     const tableBody = document.querySelector("tbody");
     tableBody.innerHTML = "";
     try {
-      const res = await getAllFromDB();
+      // const res = await getAllFromDB();
+      const res = data;
       let count = 0;
       let sum = 0;
       res.forEach((row) => {
