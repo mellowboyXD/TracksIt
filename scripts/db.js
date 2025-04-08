@@ -95,13 +95,11 @@ function insertIntoDB({ description, category, date, amount }) {
       putRequest.onerror = function () {
         reject("Error adding record:" + putRequest.error);
       };
-
     } catch (error) {
       reject("Database is not available:" + error);
     }
   });
 }
-
 
 /**
  * Retrieves all records from the "expenses" object store in IndexedDB.
@@ -127,6 +125,68 @@ function getAllFromDB() {
     } catch (err) {
       console.error(err);
     }
+  });
+}
+
+/**
+ *
+ * @param {String} month - The month with which to filter data.
+ * @param {String} year - The year with which to filter data.
+ *
+ * @returns {Promise<Object[]>}
+ */
+function getRangeFromDB(
+  month = new Date().toLocaleString("en-us", { month: "short" }).toLowerCase(),
+  year = new Date().toLocaleDateString("en-us", { year: "numeric" })
+) {
+  const months = [
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
+  ];
+
+  return new Promise(async (resolve, reject) => {
+    const monthNum = months.indexOf(month) + 1;
+    if (!monthNum) {
+      reject("Error: invalid month");
+    }
+
+    const monthStr = monthNum.toString().padStart(2, "0");
+
+    const keyRange = IDBKeyRange.bound(
+      `${year}-${monthStr}-01`,
+      `${year}-${monthStr}-31`
+    );
+
+    const db = await getDB();
+    const transaction = db.transaction(storeName, "readonly");
+    const store = transaction.objectStore(storeName);
+    const dateIndex = store.index("dateIdx");
+    let range = [];
+
+    const getDateRange = dateIndex.openCursor(keyRange);
+    getDateRange.onsuccess = function (event) {
+      const cursor = event.target.result;
+      if (cursor) {
+        range.push(cursor.value);
+        cursor.continue();
+      } else {
+        resolve(cursor);
+      }
+    };
+
+    getDateRange.onerror = function (event) {
+      reject("Could not get range: " + event.target.error);
+    };
   });
 }
 
@@ -178,7 +238,6 @@ function updateFromDB({ id, description, category, date, amount }) {
       getRecord.onerror = function () {
         reject("Error getting record to update");
       };
-
     } catch (err) {
       reject("Could not connect to db: " + err);
     }
@@ -207,7 +266,6 @@ function clearDB() {
       clearRequest.onerror = function () {
         reject("Error clearing record", clearRequest.error);
       };
-
     } catch (err) {
       reject("Could not get database: " + err);
     }
@@ -216,9 +274,9 @@ function clearDB() {
 
 /**
  * Deletes a record from the "expenses" database by ID.
- * 
+ *
  * @param {number} id The ID of the record to delete.
- * 
+ *
  * @returns {Promise<void>} A promise that resolves when the record is successfully deleted.
  */
 function deleteRecordFromDB(id) {
@@ -239,11 +297,16 @@ function deleteRecordFromDB(id) {
       deleteRequest.onerror = function () {
         reject("Error deleting record: " + deleteRequest.error);
       };
-
     } catch (err) {
       reject("Error connecting to database: " + err);
     }
   });
 }
 
-export { insertIntoDB, getAllFromDB, updateFromDB, deleteRecordFromDB, clearDB };
+export {
+  insertIntoDB,
+  getAllFromDB,
+  updateFromDB,
+  deleteRecordFromDB,
+  clearDB,
+};
