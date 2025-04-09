@@ -5,7 +5,7 @@
   }
   
   label {
-    --slider-color: #547980; /* slider color */
+    --slider-color: #0dcaf0; /* slider color */
     --gap: round(.3em,1px);  /* the gap */
     --line-thinkness: round(.4em,1px);  /* line thickness*/
     --thumb-size: round(1.5em,1px); /* thumb size*/
