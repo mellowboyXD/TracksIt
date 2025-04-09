@@ -1,0 +1,117 @@
+@property --val {
+    syntax: '<integer>';
+    inherits: true;
+    initial-value: 0; 
+  }
+  
+  label {
+    --slider-color: #0dcaf0; /* slider color */
+    --gap: round(.3em,1px);  /* the gap */
+    --line-thinkness: round(.4em,1px);  /* line thickness*/
+    --thumb-size: round(1.5em,1px); /* thumb size*/
+    --tooltip-tail-size: round(.8em,1px);  /* tooltip tail size */
+    --tooltip-radius: round(.9em,1px);  /* tooltip radius */
+    --font-size: 14px;
+    
+    timeline-scope: --thumb-view;
+    position: relative; /* No, It's not useless so don't remove it (or remove it and see what happens) */ 
+    font-size: var(--font-size);
+  }
+  
+  input {
+    width: 400px;
+    height: var(--thumb-size); /* needed for Firefox*/
+    --_c: color-mix(in srgb, var(--slider-color), #000 var(--p,0%));
+    appearance :none;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: inherit;
+  }
+  input:focus-visible,
+  input:hover{
+    --p: 25%;
+  }
+  input:active,
+  input:focus-visible{
+    --_b: var(--s)
+  }
+  /* chromium */
+  input[type="range" i]::-webkit-slider-thumb{
+    height: var(--thumb-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 0 0 0 var(--_b,var(--line-thinkness)) inset var(--_c);
+    border-image: linear-gradient(90deg,var(--_c) 50%,#ababab 0) 0 1/calc(50% - var(--line-thinkness)/2) 100vw/0 calc(100vw + var(--gap));
+    -webkit-appearance: none;
+    appearance: none;
+    transition: .3s;
+    anchor-name: --thumb;
+    view-timeline: --thumb-view inline;
+  }
+  /* Firefox */
+  input[type="range"]::-moz-range-thumb {
+    height: var(--thumb-size);
+    width: var(--thumb-size);
+    background: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 var(--_b,var(--line-thinkness)) inset var(--_c);
+    border-image: linear-gradient(90deg,var(--_c) 50%,#ababab 0) 0 1/calc(50% - var(--line-thinkness)/2) 100vw/0 calc(100vw + var(--gap));
+    -moz-appearance: none;
+    appearance: none;
+    transition: .3s;
+    anchor-name: --thumb;
+    view-timeline: --thumb-view inline;
+  }
+  output {
+    font-size: var(--font-size);
+    position-anchor: --thumb;
+    position: absolute;
+    position-area: top;
+    inset: 0 -4em;
+    color: #fff;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    padding-block: .5rem;
+    width: 3rem;
+    border-bottom: var(--tooltip-tail-size) solid #0000;
+    border-radius: var(--tooltip-radius)/var(--tooltip-radius) var(--tooltip-radius) calc(var(--tooltip-radius) + var(--tooltip-tail-size)) calc(var(--tooltip-radius) + var(--tooltip-tail-size));
+    --_m: 100%/var(--tooltip-tail-size) var(--tooltip-tail-size) no-repeat;
+    --_g: 100%,#0000 99%,#000 102%;
+    mask:
+      linear-gradient(#000 0 0) padding-box,
+      radial-gradient(100% 100% at 100% var(--_g)) calc(50% + var(--tooltip-tail-size)/2) var(--_m),
+      radial-gradient(100% 100% at 0    var(--_g)) calc(50% - var(--tooltip-tail-size)/2) var(--_m);
+    animation: range linear both;
+    animation-timeline: --thumb-view;
+    animation-range: entry 100% exit 0%;
+  }
+  output.bottom {
+    position-area: bottom;
+    border-top: var(--tooltip-tail-size) solid #0000;
+    border-bottom: none;
+    border-radius: var(--tooltip-radius)/calc(var(--tooltip-radius) + var(--tooltip-tail-size)) calc(var(--tooltip-radius) + var(--tooltip-tail-size)) var(--tooltip-radius) var(--tooltip-radius);
+    --_m: 0%/var(--tooltip-tail-size) var(--tooltip-tail-size) no-repeat;
+    --_g: 0%,#0000 99%,#000 102%;
+  }
+  output:before {
+    content: counter(num);
+    counter-reset: num var(--val);
+  }
+
+  span#budget-amount {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  @keyframes range {
+    0%   {background: #e3091c ;--val:var(--max)}
+    100% {background: #34b609;--val:var(--min)}
+  }
+  
+  @supports not (anchor-name: ---) {
+    output {
+      display: none;
+    }
+  }
