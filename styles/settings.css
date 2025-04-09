@@ -115,3 +115,7 @@
       display: none;
     }
   }
+
+  .faded {
+    opacity: 0.7;
+  }
