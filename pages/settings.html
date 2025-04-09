@@ -19,10 +19,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../styles/settings.css">
   </head>
   <body class="bg-dark text-light">
     <div
-      class="container-fluid p-0 d-flex flex-column align-items-center justify-content-between min-vh-100"
+      class="container-fluid p-0 d-flex flex-column align-items-center justify-items-between vh-100"
     >
     <nav class="navbar bg-dark-subtle navbar-expand-lg w-100">
       <div class="container-fluid">
@@ -39,8 +40,19 @@
         </a>
       </div>
     </nav>
-      <main class="w-100 m-3 d-flex flex-column align-items-center justify-content-between">
-        TODO: implement permanent settings
+      <main class="w-100 h-100 p-3 d-flex flex-column">
+        <div class="card bg-dark text-light border-info mb-3">
+          <div class="card-header border-info"><b>Current Monthly Budget: </b><span class="text-warning" id="budget-amount">$250</span></div>
+          <div class="card-body">
+            <h5 class="card-title">Update your budget</h5>
+            <p class="card-text mb-4">Use the slider to update your budget. Then click on the update button</p>
+            <label class="w-100 mt-4">
+              <input type="range" class="w-100" id="one" min="0" max="1000" step="10" value="250">
+              <output for="one" style="--min: 0;--max: 1000"></output>
+            </label> 
+          </div>
+        </div>
+        <button class="btn btn-outline-danger" id="saveSettings">Save Preferences</button>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
@@ -49,6 +61,8 @@
         </p>
       </footer>
     </div>
+
+    <script src="../scripts/settings.js" defer></script>
 
     <!-- Bootstrap Script -->
     <script
