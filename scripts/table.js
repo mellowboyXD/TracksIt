@@ -33,7 +33,7 @@ export async function refreshTable(data) {
       });
 
       const sumEl = document.getElementById("sum-total");
-      sumEl.innerText = "$" + sum;
+      sumEl.innerText = "$" + sum.toFixed(2);
     } catch (err) {
       console.error("Error getting data. ", err);
       return false;
