@@ -65,7 +65,7 @@ const options = {
           }
         });
         let percentage = ((value * 100) / sum).toFixed(1) + "%";
-        sumEl.innerText = sum;
+        sumEl.innerText = sum.toFixed(2);
         if (sum <= 0) {
           percentage = "No data";
         } else if (percentage === "0.0%") {
