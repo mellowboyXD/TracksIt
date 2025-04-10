@@ -1,5 +1,5 @@
 import { fetchData } from "./index.js";
-import { getChartType } from "./settings.js";
+import { getChartType, getShowLegend } from "./settings.js";
 
 const dataValues = await fetchData();
 
@@ -7,7 +7,7 @@ const dataValues = await fetchData();
 let chartType = getChartType();
 let colorPalette = ["green", "red", "orange", "purple", "blue"];
 let borderWidth = 0.8;
-let showLegend = false;
+let showLegend = getShowLegend();
 let legendPosition = "bottom";
 let dataLabelColor = "#f8f9fa";
 let dataLabelFontSize = 13;

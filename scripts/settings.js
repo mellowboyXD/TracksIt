@@ -2,15 +2,20 @@ const sliderEl = document.getElementById("budget-slider");
 const budgetAmountEl = document.getElementById("budget-amount");
 const form = document.querySelector("form");
 const radios = document.querySelectorAll("input[name='chartType-radio']");
+const dashboardLegend = document.getElementById("show-legend-input");
+const dashboardLegendText = document.getElementById("show-legend-setting-text");
 const saveBtn = document.getElementById("save-settings");
 
 const DEFAULT_BUDGET = "250";
 const BUDGET_ENTRY = "budget";
 const DEFAULT_CHARTTYPE = "pie";
 const CHARTTYPE_ENTRY = "chartType";
+const DEFAULT_SHOW_LEGEND = false;
+const SHOW_LEGEND_ENTRY = "showLegend";
 
 let budget = getBudget();
 let chartType = getChartType();
+let showLegend = getShowLegend();
 
 form.onsubmit = function (event) {
     event.preventDefault();
@@ -21,16 +26,35 @@ window.addEventListener("DOMContentLoaded", async () => {
     await setAppVersion();
     setBudgetAmount();
     setRadio();
+    setShowLegendSwitch();
+    setShowLegendText();
+
+    dashboardLegend.onchange = function () {
+        setShowLegendText();
+    }
 
     // Save settings
     saveBtn.addEventListener("click", () => {
-        window.localStorage.setItem(BUDGET_ENTRY, sliderEl.value);
+        window.localStorage.setItem(BUDGET_ENTRY, getSelectedBudget());
         window.localStorage.setItem(CHARTTYPE_ENTRY, getSelectedChartType());
+        window.localStorage.setItem(SHOW_LEGEND_ENTRY, getSelectedShowLegend());
         
         window.location.reload();
     })
   }
 });
+
+function setShowLegendSwitch() {
+    dashboardLegend.checked = getShowLegend();
+}
+
+function setShowLegendText() {  
+    if(!dashboardLegend.checked) {
+        dashboardLegendText.innerText = "Legend will not be displayed on the dashboard";
+    } else {
+        dashboardLegendText.innerText = "Legend will be displayed on the dashboard";
+    }
+}
 
 function setBudgetAmount() {
     budgetAmountEl.innerText = `$${budget}`;
@@ -50,11 +74,33 @@ function setRadio() {
     }
 }
 
+function getSelectedBudget() {
+    return sliderEl.value;
+}
+
+function getSelectedShowLegend() {
+    return dashboardLegend.checked;
+}
+
 function getSelectedChartType() {
     for(let i = 0; i < radios.length; i++) {
         if(radios[i].checked) {
             return radios[i].value;
         }
+    }
+}
+
+export function getShowLegend() {
+    let showLegend = window.localStorage.getItem(SHOW_LEGEND_ENTRY);
+    if(!showLegend) {
+        window.localStorage.setItem(SHOW_LEGEND_ENTRY, DEFAULT_SHOW_LEGEND);
+        showLegend = window.localStorage.getItem(SHOW_LEGEND_ENTRY);
+    }
+
+    if(showLegend === "false") {
+        return false;
+    } else {
+        return true;
     }
 }
 
