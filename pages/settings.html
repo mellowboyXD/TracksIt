@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TracksIt: Settings</title>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -19,45 +19,101 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../styles/common.css" />
-    <link rel="stylesheet" href="../styles/settings.css">
+    <link rel="stylesheet" href="../styles/settings.css" />
   </head>
   <body class="bg-dark text-light">
     <div
       class="container-fluid p-0 d-flex flex-column align-items-center justify-items-between vh-100"
     >
-    <nav class="navbar bg-dark-subtle navbar-expand-lg w-100">
-      <div class="container-fluid">
-        <a class="navbar-brand text-light" href="../index.html">
-          <i class="fa-solid fa-chart-pie"></i>
-          Dashboard
-        </a>
-        <a class="navbar-brand text-light" href="table.html">
-          <i class="fa-solid fa-table"></i>
-          Table
-        </a>
-        <a class="navbar-brand text-primary" href="#">
-          <i class="fa-solid fa-gear"></i>
-        </a>
-      </div>
-    </nav>
+      <nav class="navbar bg-dark-subtle navbar-expand-lg w-100">
+        <div class="container-fluid">
+          <a class="navbar-brand text-light" href="../index.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            Dashboard
+          </a>
+          <a class="navbar-brand text-light" href="table.html">
+            <i class="fa-solid fa-table"></i>
+            Table
+          </a>
+          <a class="navbar-brand text-primary" href="#">
+            <i class="fa-solid fa-gear"></i>
+          </a>
+        </div>
+      </nav>
       <main class="w-100 h-100 p-3 d-flex flex-column">
-        <span class="faded text-end mb-2">App Version: <span id="tag-name"></span></span>
+        <span class="faded text-end mb-2"
+          >App Version: <span id="tag-name"></span
+        ></span>
+        <form>
         <div class="card bg-dark text-light border-info mb-3">
-          <div class="card-header border-info"><b>Current Monthly Budget: </b><span class="text-warning" id="budget-amount">$250</span></div>
+          <div class="card-header border-info">
+            <b>Current Monthly Budget: </b
+            ><span class="text-warning" id="budget-amount">$250</span>
+          </div>
           <div class="card-body">
-            <h5 class="card-title">Update your budget.</h5>
+            <h6 class="card-title">Set your monthly budget.</h6>
             <label class="w-100 mt-5">
-              <input type="range" class="w-100" id="budget-slider" min="0" max="1000" step="10" value="250">
-              <output for="budget-slider" style="--min: 0;--max: 1000"></output>
-            </label> 
+              <input
+                type="range"
+                class="w-100"
+                id="budget-slider"
+                min="50"
+                max="1000"
+                step="10"
+                value="250"
+              />
+              <output
+                for="budget-slider"
+                style="--min: 50; --max: 1000"
+              ></output>
+            </label>
           </div>
         </div>
-        <button class="btn btn-outline-danger" id="save-settings">Save Preferences</button>
+        <div class="card bg-dark text-light border-info mb-3">
+          <div class="card-header border-info"><b>Dashboard Settings</b></div>
+          <div class="card-body">
+            <div class="setting">
+              <h6 class="card-title">
+                Change the chart type displayed on the dashboard.
+              </h6>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="chartType-radio"
+                  id="pie-radio-check"
+                  value="pie"
+                />
+                <label class="form-check-label" for="pie-radio-check"
+                  >Pie Chart</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="chartType-radio"
+                  id="doghnut-radio-check"
+                  value="doughnut"
+                />
+                <label class="form-check-label" for="doghnut-radio-check"
+                  >Doghnut Chart</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-danger w-100" id="save-settings">
+          <i class="fa-regular fa-floppy-disk"></i> Save Preferences
+        </button>
+        </form>
       </main>
       <footer class="w-100 bg-dark-subtle text-center">
         <p class="mt-1">
           &copy; 2025
-          <a href="https://github.com/mellowboyxd"><i class="fa-brands fa-github"></i> mellowboyxd</a>    
+          <a href="https://github.com/mellowboyxd"
+            ><i class="fa-brands fa-github"></i> mellowboyxd</a
+          >
         </p>
       </footer>
     </div>

@@ -1,6 +1,17 @@
 import { fetchData } from "./index.js";
+import { getChartType } from "./settings.js";
 
 const dataValues = await fetchData();
+
+// User Configs
+let chartType = getChartType();
+let colorPalette = ["green", "red", "orange", "purple", "blue"];
+let borderWidth = 0.8;
+let showLegend = false;
+let legendPosition = "bottom";
+let dataLabelColor = "#f8f9fa";
+let dataLabelFontSize = 13;
+let dataLabelFontWeight = "bold";
 
 export function updateData(values) {
   const dataValues = values;
@@ -23,15 +34,7 @@ export function updateData(values) {
 }
 
 const chartData = updateData(dataValues);
-// User Configs
-let chartType = "pie";
-let colorPalette = ["green", "red", "orange", "purple", "blue"];
-let borderWidth = 0.8;
-let showLegend = false;
-let legendPosition = "bottom";
-let dataLabelColor = "#f8f9fa";
-let dataLabelFontSize = 13;
-let dataLabelFontWeight = "bold";
+
 
 const data = {
   labels: Object.keys(chartData),
