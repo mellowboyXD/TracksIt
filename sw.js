@@ -39,27 +39,19 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
         if(cachedResponse !== undefined) {           
-            if(event.request.mode === "navigate") {
-                console.log(navigator.onLine);
-                const offline = '<i class="fa-solid fa-link-slash text-danger"></i>';
-                const online = '<i class="fa-solid fa-link text-success"></i>';
-                // const netStat = document.getElementById("net-status");
-                console.log(navigator.onLine);
-                return cachedResponse;
-            }
             return cachedResponse;
         } else {
             return fetch(event.request).then((response) => {
                 let responseClone = response.clone();
-                if (event.request.url.includes("/ping.txt") || event.request.url.includes("https://google.com")) {
-                    return fetch(event.request); // don’t cache
+                if (event.request.url.includes("https://google.com")) {
+                    return fetch(event.request);
                 }
                 caches.open("v1").then((cache) => {
                     cache.put(event.request, responseClone);
                 });
                 return response;
             })
-            .catch((err) => console.log("My error here: ", err));
+            .catch((err) => console.log("No Internet"));
         }
     })
   );
