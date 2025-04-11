@@ -44,12 +44,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     })
 
     // Save settings
-    saveBtn.addEventListener("click", () => {
+    saveBtn.addEventListener("click", async () => {
         window.localStorage.setItem(BUDGET_ENTRY, getSelectedBudget());
         window.localStorage.setItem(CHARTTYPE_ENTRY, getSelectedChartType());
         window.localStorage.setItem(SHOW_LEGEND_ENTRY, getSelectedShowLegend());
         
-        showAlert("Settings were saved");
+        await showAlert("Settings were saved");
         window.location.reload();
     })
   }
