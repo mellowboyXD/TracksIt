@@ -139,5 +139,3 @@ export async function getVersionNumber() {
     }
     return "Latest release";
 }
-
-setInterval(updateOnlineStatus, 10000);

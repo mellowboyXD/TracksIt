@@ -24,5 +24,3 @@ window.addEventListener("DOMContentLoaded", async () => {
   await fetchData();
   await updateOnlineStatus();
 });
-
-setInterval(updateOnlineStatus, 10000);

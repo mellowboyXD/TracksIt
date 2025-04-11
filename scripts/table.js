@@ -46,5 +46,3 @@ window.addEventListener("DOMContentLoaded", async () => {
   await refreshTable();
   await updateOnlineStatus();
 });
-
-setInterval(updateOnlineStatus, 10000);
