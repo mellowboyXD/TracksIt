@@ -1,3 +1,4 @@
+import { updateOnlineStatus } from "./core.js";
 import { getAllFromDB, getRangeFromDB } from "./db.js";
 
 const yearSelectEl = document.getElementById("year-selector");
@@ -43,4 +44,9 @@ export async function refreshTable(data) {
 
 window.addEventListener("DOMContentLoaded", async () => {
   await refreshTable();
+  await updateOnlineStatus();
 });
+
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+await updateOnlineStatus();

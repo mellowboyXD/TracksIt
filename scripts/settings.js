@@ -1,3 +1,5 @@
+import { updateOnlineStatus } from "./core.js";
+
 const sliderEl = document.getElementById("budget-slider");
 const budgetAmountEl = document.getElementById("budget-amount");
 const form = document.querySelector("form");
@@ -23,6 +25,7 @@ form.onsubmit = function (event) {
 
 window.addEventListener("DOMContentLoaded", async () => {
   if (window.location.href.includes("settings")) {
+    await updateOnlineStatus();
     await setAppVersion();
     setBudgetAmount();
     setRadio();
@@ -136,3 +139,7 @@ export async function getVersionNumber() {
     }
     return "Latest release";
 }
+
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+await updateOnlineStatus();
