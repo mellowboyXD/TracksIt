@@ -2,7 +2,7 @@ const indexedDB = window.indexedDB;
 if (!indexedDB) {
   alert("Your browser does not support IndexedDB!");
 } else {
-  console.log("IndexedDB is supported");
+  // console.log("IndexedDB is supported");
 }
 
 const request = indexedDB.open("expensesDatabase", 1);
@@ -31,7 +31,7 @@ request.onupgradeneeded = function () {
 
 request.onsuccess = function () {
   db = request.result;
-  console.log("Database initialized successfully.");
+  // console.log("Database initialized successfully.");
 };
 
 /**
@@ -48,7 +48,7 @@ function getDB() {
     } else {
       request.onsuccess = function (e) {
         db = e.target.result;
-        console.log("Database is ready.");
+        // console.log("Database is ready.");
         resolve(db);
       };
       request.onerror = function (e) {
