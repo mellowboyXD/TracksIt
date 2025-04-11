@@ -102,7 +102,6 @@ export function showAlert(message, type=SUCCESS) {
   modal.tabIndex = -1;
   modal.setAttribute("data-bs-backdrop", "static");
   modal.setAttribute("data-bs-keyboard", "false");
-  modal.setAttribute("aria-hidden", "true");
   modal.id = "alert-modal";
   modal.innerHTML = `
     <div class="modal-dialog">

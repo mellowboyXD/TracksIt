@@ -1,4 +1,4 @@
-import { updateOnlineStatus } from "./core.js";
+import { ERROR, isOnline, showAlert, unregisterSw, updateOnlineStatus } from "./core.js";
 
 const sliderEl = document.getElementById("budget-slider");
 const budgetAmountEl = document.getElementById("budget-amount");
@@ -35,6 +35,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     dashboardLegend.onchange = function () {
         setShowLegendText();
     }
+
+    const clearCacheBtn = document.getElementById("clear-cache-btn");
+    clearCacheBtn.addEventListener("click", async () => {
+        await unregisterSw();
+        await clearCache();
+        // window.location.reload();
+    })
 
     // Save settings
     saveBtn.addEventListener("click", () => {
@@ -124,6 +131,24 @@ export function getBudget() {
         return window.localStorage.getItem(BUDGET_ENTRY);;
     } else {
         return budgetAmount;
+    }
+}
+
+async function clearCache() {
+    const ping = await isOnline();    
+    if(ping) {
+        caches.keys().then(cacheNames => {            
+            if(cacheNames.length <= 0) {
+                showAlert("Cache empty. Nothing to clear", ERROR);
+            } else {
+                cacheNames.forEach(cacheName => {
+                    caches.delete(cacheName);
+                });
+                showAlert("Cache has been cleared");
+            }
+        });
+    } else {
+        showAlert("You are offline", ERROR);
     }
 }
 
