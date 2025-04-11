@@ -49,6 +49,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         window.localStorage.setItem(CHARTTYPE_ENTRY, getSelectedChartType());
         window.localStorage.setItem(SHOW_LEGEND_ENTRY, getSelectedShowLegend());
         
+        showAlert("Settings were saved");
         window.location.reload();
     })
   }
