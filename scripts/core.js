@@ -1,3 +1,7 @@
+export const SUCCESS = "success";
+export const ERROR = "error";
+export const WARNING = "warning";
+
 export async function checkSwRegistration() {
   let swLocation = "sw.js";
   if (
@@ -50,7 +54,7 @@ function imagePing(url) {
   });
 }
 
-async function isOnline() {
+export async function isOnline() {
   try {
     // const response = await fetch("/ping.txt", {
     //   cache: "no-store",
@@ -77,4 +81,57 @@ export async function updateOnlineStatus() {
   } else {
     netStat.innerHTML = offline;
   }
+}
+
+export function showAlert(message, type=SUCCESS) {
+  let buttonColor = "btn-success";
+  let modalTitle = '<i class="fa-regular fa-bell"></i> SUCCESS'
+  let borderColor = "border-success";
+  if(type === ERROR) {
+    buttonColor = "btn-danger"
+    modalTitle = '<i class="fa-solid fa-radiation"></i>  ERROR'
+    borderColor = "border-danger"
+  } else if (type === WARNING) {
+    buttonColor = "btn-warning";
+    modalTitle = '<i class="fa-solid fa-triangle-exclamation"></i> WARNING'
+    borderColor = "border-warning";
+  }
+  const mainEl = document.querySelector("main");
+  const modal = document.createElement("div");
+  modal.classList.add("modal", "fade");
+  modal.tabIndex = -1;
+  modal.setAttribute("data-bs-backdrop", "static");
+  modal.setAttribute("data-bs-keyboard", "false");
+  modal.setAttribute("aria-hidden", "true");
+  modal.id = "alert-modal";
+  modal.innerHTML = `
+    <div class="modal-dialog">
+      <div class="modal-content border ${borderColor} bg-dark text-light">
+        <div class="modal-header border-bottom ${borderColor} w-100">
+          <h5 class="modal-title text-center w-100">${modalTitle}</h5>
+        </div>
+        <div class="modal-body">
+          <p>${message}</p>
+        </div>
+        <div class="text-center pb-3 ps-3 pe-3 w-100">
+          <button id="ok-btn" type="button" class="btn ${buttonColor} w-100" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return new Promise((resolve) => {
+    mainEl.appendChild(modal);
+
+    const myModal = new bootstrap.Modal(modal);
+    myModal.show();  
+  
+    modal.addEventListener('hidden.bs.modal', () => {
+      mainEl.removeChild(modal);
+    })
+
+    modal.querySelector("#ok-btn").addEventListener('click', () => {
+      resolve();
+    });
+  });
 }
