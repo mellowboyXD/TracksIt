@@ -47,6 +47,4 @@ window.addEventListener("DOMContentLoaded", async () => {
   await updateOnlineStatus();
 });
 
-window.addEventListener("online", updateOnlineStatus);
-window.addEventListener("offline", updateOnlineStatus);
-await updateOnlineStatus();
+setInterval(updateOnlineStatus, 10000);

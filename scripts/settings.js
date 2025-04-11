@@ -140,6 +140,4 @@ export async function getVersionNumber() {
     return "Latest release";
 }
 
-window.addEventListener("online", updateOnlineStatus);
-window.addEventListener("offline", updateOnlineStatus);
-await updateOnlineStatus();
+setInterval(updateOnlineStatus, 10000);
