@@ -9,3 +9,7 @@
 .blue-border {
     border: 1px solid blue !important;
 }
+
+#net-status {
+    font-size: 12px;
+}
