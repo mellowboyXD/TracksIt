@@ -43,7 +43,7 @@ self.addEventListener("fetch", (event) => {
         } else {
             return fetch(event.request).then((response) => {
                 let responseClone = response.clone();
-                if (event.request.url.includes("https://google.com")) {
+                if (event.request.url.includes("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")) {
                     return fetch(event.request);
                 }
                 caches.open("v1").then((cache) => {

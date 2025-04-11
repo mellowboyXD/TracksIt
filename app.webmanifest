@@ -1,0 +1,14 @@
+{
+    "name": "TracksIt Expense Tracker Web App",
+    "short_name": "TracksIt",
+    "description": "A simple expense tracking web application that is completely client-based.",
+    "icons": [{
+        "src": "images/logo.png",
+        "type": "image/png",
+        "sizes": "1024x1024"
+    }],
+    "orientation": "portrait",
+    "theme_color": "#2b2f32",
+    "background_color": "#212529",
+    "display": "standalone"
+}
