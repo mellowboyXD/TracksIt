@@ -177,7 +177,7 @@ export async function getVersionNumber() {
         const data = await response.json();
         return data[0].name;
     } catch(err) {
-        console.error("Could not get latest release name: ", err);
+        // Working offline
         return LATEST;
     }
 }
