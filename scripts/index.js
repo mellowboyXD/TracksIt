@@ -23,4 +23,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   await checkSwRegistration();
   await fetchData();
   await updateOnlineStatus();
+
+  setInterval(await updateOnlineStatus, 5000);
 });

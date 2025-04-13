@@ -45,4 +45,6 @@ export async function refreshTable(data) {
 window.addEventListener("DOMContentLoaded", async () => {
   await refreshTable();
   await updateOnlineStatus();
+
+  setInterval(await updateOnlineStatus, 5000);
 });

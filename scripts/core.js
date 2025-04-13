@@ -12,8 +12,11 @@ export async function checkSwRegistration() {
   }
   if ("serviceWorker" in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register(swLocation);
-      console.log("Service worker registered");
+      let registration = await navigator.serviceWorker.getRegistration(swLocation);
+      if(!registration) {
+        registration = await navigator.serviceWorker.register(swLocation);
+        console.log("Service worker registered");
+      }
     } catch (err) {
       console.error("Error registering service worker: ", err);
     }
@@ -46,22 +49,26 @@ export async function unregisterSw() {
 }
 
 function imagePing(url) {
-  return new Promise((resolve, reject) => {
+  const pingImage = new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(true); // Got a valid response
-    img.onerror = () => resolve(false); // Failed to load
-    img.src = `${url}?_=${Date.now()}`; // prevent caching
+    img.src = `${url}?_=${Date.now()}`;
+    img.onload = () => resolve(true); 
+    img.onerror = () => resolve(false);
   });
+
+  const timeout = new Promise((resolve) => {
+    setTimeout(() => resolve(false), 700);
+  });
+
+  return Promise.race([pingImage, timeout]);
+
 }
 
 export async function isOnline() {
   try {
-    // const response = await fetch("/ping.txt", {
-    //   cache: "no-store",
-    //   method: "HEAD",
-    // });
-    const response = await imagePing("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png");
-
+    const target = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
+    const response = imagePing(target); 
+    
     return response;
   } catch (e) {
     return false;
@@ -74,9 +81,9 @@ export async function updateOnlineStatus() {
   const netStat = document.getElementById("net-status");
 
   const ping = await isOnline();
+  
   if (ping) {
     netStat.innerHTML = online;
-    await unregisterSw();
     await checkSwRegistration();
   } else {
     netStat.innerHTML = offline;

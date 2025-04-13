@@ -15,6 +15,8 @@ const CHARTTYPE_ENTRY = "chartType";
 const DEFAULT_SHOW_LEGEND = false;
 const SHOW_LEGEND_ENTRY = "showLegend";
 
+const LATEST = "latest";
+
 let budget = getBudget();
 let chartType = getChartType();
 let showLegend = getShowLegend();
@@ -38,9 +40,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const clearCacheBtn = document.getElementById("clear-cache-btn");
     clearCacheBtn.addEventListener("click", async () => {
-        await unregisterSw();
         await clearCache();
-        // window.location.reload();
     })
 
     // Save settings
@@ -52,6 +52,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         await showAlert("Settings were saved");
         window.location.reload();
     })
+
+    setInterval(await updateOnlineStatus, 5000);
   }
 });
 
@@ -74,7 +76,20 @@ function setBudgetAmount() {
 
 async function setAppVersion() {
     const tagNameEl = document.getElementById('tag-name');
-    tagNameEl.innerText = await getVersionNumber();
+    const tag = await getVersionNumber();
+    tagNameEl.innerText = tag;
+    const netStat = await isOnline();
+
+    if(!netStat) {
+        tagNameEl.href = "#";
+        tagNameEl.addEventListener("click", () => {
+            showAlert("You are offline", ERROR);
+        });
+    } else {
+        tagNameEl.href = "https://github.com/mellowboyXD/TracksIt/releases";
+    }
+    
+    
 }
 
 function setRadio() {
@@ -138,10 +153,11 @@ export function getBudget() {
 async function clearCache() {
     const ping = await isOnline();    
     if(ping) {
-        caches.keys().then(cacheNames => {            
+        caches.keys().then(async (cacheNames) => {            
             if(cacheNames.length <= 0) {
                 showAlert("Cache empty. Nothing to clear", ERROR);
             } else {
+                await unregisterSw();
                 cacheNames.forEach(cacheName => {
                     caches.delete(cacheName);
                 });
@@ -161,7 +177,7 @@ export async function getVersionNumber() {
         const data = await response.json();
         return data[0].name;
     } catch(err) {
-        console.error("Could not get latest release name: ", err);
+        // Working offline
+        return LATEST;
     }
-    return "Latest release";
 }

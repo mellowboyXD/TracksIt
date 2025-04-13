@@ -27,31 +27,38 @@ const urlsToCache = [
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-solid-900.woff2",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/webfonts/fa-brands-400.woff2",
 ];
+
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open("v1").then((cache) => cache.addAll(urlsToCache)));
 });
 
-self.addEventListener("activate", () => {
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
   console.log("Service worker activated");
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", (event) => {  
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(event.request).then((cachedResponse) => {      
         if(cachedResponse !== undefined) {           
-            return cachedResponse;
-        } else {
-            return fetch(event.request).then((response) => {
-                let responseClone = response.clone();
-                if (event.request.url.includes("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")) {
-                    return fetch(event.request);
-                }
-                caches.open("v1").then((cache) => {
-                    cache.put(event.request, responseClone);
-                });
-                return response;
-            })
-            .catch((err) => console.log("No Internet"));
+          return cachedResponse;
+        } else {        
+          return fetch(event.request).then((response) => {
+              let responseClone = response.clone();
+              if (event.request.url.includes("404") || 
+                  event.request.url.includes("google.com") || 
+                  event.request.url.includes("github.com")) {
+                    
+                  return fetch(event.request);
+              }
+              caches.open("v1").then((cache) => {
+                  cache.put(event.request, responseClone);
+              });
+              return response;
+          })
+          .catch((err) => {
+            return new Response("Working Offline: ", err);
+          });
         }
     })
   );
