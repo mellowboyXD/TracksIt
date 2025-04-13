@@ -38,7 +38,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const clearCacheBtn = document.getElementById("clear-cache-btn");
     clearCacheBtn.addEventListener("click", async () => {
-        await unregisterSw();
         await clearCache();
         // window.location.reload();
     })
@@ -138,10 +137,11 @@ export function getBudget() {
 async function clearCache() {
     const ping = await isOnline();    
     if(ping) {
-        caches.keys().then(cacheNames => {            
+        caches.keys().then(async (cacheNames) => {            
             if(cacheNames.length <= 0) {
                 showAlert("Cache empty. Nothing to clear", ERROR);
             } else {
+                await unregisterSw();
                 cacheNames.forEach(cacheName => {
                     caches.delete(cacheName);
                 });

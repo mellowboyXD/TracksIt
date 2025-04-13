@@ -68,7 +68,7 @@ function imagePing(url) {
 
 export async function isOnline() {
   try {
-    const target = "404"//"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
+    const target = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
     const response = await imagePing(target); 
     return response;
   } catch (e) {
@@ -85,7 +85,6 @@ export async function updateOnlineStatus() {
   
   if (ping) {
     netStat.innerHTML = online;
-    await unregisterSw();
     await checkSwRegistration();
   } else {
     netStat.innerHTML = offline;
