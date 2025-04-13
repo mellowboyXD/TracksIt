@@ -46,7 +46,8 @@ self.addEventListener("fetch", (event) => {
           return fetch(event.request).then((response) => {
               let responseClone = response.clone();
               if (event.request.url.includes("404") || 
-                  event.request.url.includes("google.com")) {
+                  event.request.url.includes("google.com") || 
+                  event.request.url.includes("github.com")) {
                     
                   return fetch(event.request);
               }

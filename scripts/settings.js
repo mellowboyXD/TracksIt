@@ -15,6 +15,8 @@ const CHARTTYPE_ENTRY = "chartType";
 const DEFAULT_SHOW_LEGEND = false;
 const SHOW_LEGEND_ENTRY = "showLegend";
 
+const LATEST = "latest";
+
 let budget = getBudget();
 let chartType = getChartType();
 let showLegend = getShowLegend();
@@ -74,7 +76,20 @@ function setBudgetAmount() {
 
 async function setAppVersion() {
     const tagNameEl = document.getElementById('tag-name');
-    tagNameEl.innerText = await getVersionNumber();
+    const tag = await getVersionNumber();
+    tagNameEl.innerText = tag;
+    const netStat = await isOnline();
+
+    if(!netStat) {
+        tagNameEl.href = "#";
+        tagNameEl.addEventListener("click", () => {
+            showAlert("You are offline", ERROR);
+        });
+    } else {
+        tagNameEl.href = "https://github.com/mellowboyXD/TracksIt/releases";
+    }
+    
+    
 }
 
 function setRadio() {
@@ -163,6 +178,6 @@ export async function getVersionNumber() {
         return data[0].name;
     } catch(err) {
         console.error("Could not get latest release name: ", err);
-        return "latest"
+        return LATEST;
     }
 }
