@@ -6,10 +6,15 @@
     display: none;
 }
 
-.blue-border {
-    border: 1px solid blue !important;
+#net-status {
+    width: 16px;
 }
 
-#net-status {
-    font-size: 12px;
+#net-status i {
+    font-size: 11px;
+}
+
+#tag-name {
+    border: 2px solid red;
+    width: 100px;
 }
