@@ -45,7 +45,9 @@ self.addEventListener("fetch", (event) => {
         } else {        
           return fetch(event.request).then((response) => {
               let responseClone = response.clone();
-              if (event.request.url.includes("404") || event.request.url.includes("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")) {
+              if (event.request.url.includes("404") || 
+                  event.request.url.includes("google.com")) {
+                    
                   return fetch(event.request);
               }
               caches.open("v1").then((cache) => {
@@ -54,8 +56,7 @@ self.addEventListener("fetch", (event) => {
               return response;
           })
           .catch((err) => {
-            console.log("No Internet: ", err);
-            return new Response("No Internet");
+            return new Response("Working Offline: ", err);
           });
         }
     })

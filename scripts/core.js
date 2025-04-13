@@ -46,30 +46,26 @@ export async function unregisterSw() {
 }
 
 function imagePing(url) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const img = new Image();
-      img.src = `${url}?_=${Date.now()}`;
-
-      img.onload = () => {
-        console.log("Success ping");
-        resolve(true);
-      }; 
-
-      img.onerror = () => {
-        console.log("Failed ping");
-        
-        resolve(false);
-      };
-
-    }, 5);
+  const pingImage = new Promise((resolve) => {
+    const img = new Image();
+    img.src = `${url}?_=${Date.now()}`;
+    img.onload = () => resolve(true); 
+    img.onerror = () => resolve(false);
   });
+
+  const timeout = new Promise((resolve) => {
+    setTimeout(() => resolve(false), 700);
+  });
+
+  return Promise.race([pingImage, timeout]);
+
 }
 
 export async function isOnline() {
   try {
     const target = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
-    const response = await imagePing(target); 
+    const response = imagePing(target); 
+    
     return response;
   } catch (e) {
     return false;
