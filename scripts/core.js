@@ -46,22 +46,30 @@ export async function unregisterSw() {
 }
 
 function imagePing(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(true); // Got a valid response
-    img.onerror = () => resolve(false); // Failed to load
-    img.src = `${url}?_=${Date.now()}`; // prevent caching
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const img = new Image();
+      img.src = `${url}?_=${Date.now()}`;
+
+      img.onload = () => {
+        console.log("Success ping");
+        resolve(true);
+      }; 
+
+      img.onerror = () => {
+        console.log("Failed ping");
+        
+        resolve(false);
+      };
+
+    }, 5);
   });
 }
 
 export async function isOnline() {
   try {
-    // const response = await fetch("/ping.txt", {
-    //   cache: "no-store",
-    //   method: "HEAD",
-    // });
-    const response = await imagePing("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png");
-
+    const target = "404"//"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
+    const response = await imagePing(target); 
     return response;
   } catch (e) {
     return false;
@@ -74,6 +82,7 @@ export async function updateOnlineStatus() {
   const netStat = document.getElementById("net-status");
 
   const ping = await isOnline();
+  
   if (ping) {
     netStat.innerHTML = online;
     await unregisterSw();

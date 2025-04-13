@@ -37,10 +37,12 @@ self.addEventListener("activate", () => {
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(event.request).then((cachedResponse) => {      
         if(cachedResponse !== undefined) {           
             return cachedResponse;
         } else {
+          console.log(event.request.url);
+          
             return fetch(event.request).then((response) => {
                 let responseClone = response.clone();
                 if (event.request.url.includes("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png")) {
@@ -51,7 +53,7 @@ self.addEventListener("fetch", (event) => {
                 });
                 return response;
             })
-            .catch((err) => console.log("No Internet"));
+            .catch((err) => console.log("No Internet: ", err));
         }
     })
   );
