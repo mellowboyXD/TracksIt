@@ -12,8 +12,11 @@ export async function checkSwRegistration() {
   }
   if ("serviceWorker" in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register(swLocation);
-      console.log("Service worker registered");
+      let registration = await navigator.serviceWorker.getRegistration(swLocation);
+      if(!registration) {
+        registration = await navigator.serviceWorker.register(swLocation);
+        console.log("Service worker registered");
+      }
     } catch (err) {
       console.error("Error registering service worker: ", err);
     }

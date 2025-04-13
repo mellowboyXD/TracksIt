@@ -39,7 +39,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     const clearCacheBtn = document.getElementById("clear-cache-btn");
     clearCacheBtn.addEventListener("click", async () => {
         await clearCache();
-        // window.location.reload();
     })
 
     // Save settings
@@ -51,6 +50,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         await showAlert("Settings were saved");
         window.location.reload();
     })
+
+    setInterval(await updateOnlineStatus, 5000);
   }
 });
 
@@ -162,6 +163,6 @@ export async function getVersionNumber() {
         return data[0].name;
     } catch(err) {
         console.error("Could not get latest release name: ", err);
+        return "latest"
     }
-    return "Latest release";
 }
