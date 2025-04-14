@@ -5,7 +5,7 @@
 # TracksIt - Personal Expense Tracker
 
 **TracksIt** is a personal, client-based, expense tracker web app that makes use of native web apis to perform tradition serverside tasks.
-Everything is stored on the browser using **localStorage**, **indexedDB** and **cacheStorage**. The applicatioon was designed with mobile in mind
+Everything is stored on the browser using **localStorage**, **indexedDB** and **cacheStorage**. The **Progressive Web App** was designed with mobile in mind
 and thus can also be used while offline provided that the dashboard was opened **at least once** while online. This allows caching of the pages so 
 as to make the offline transition a smooth experience.
 
